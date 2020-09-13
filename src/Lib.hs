@@ -1,6 +1,7 @@
 module Lib
-    ( someFunc
-    ) where
+  ( len,
+  )
+where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+len :: Floating a => [a] -> a
+len = sqrt . sum . map (^ 2)
