@@ -4,4 +4,4 @@ module Lib
 where
 
 len :: Floating a => [a] -> a
-len = undefined
+len = sqrt . sum . map (^ 2)
