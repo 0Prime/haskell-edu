@@ -1,11 +1,12 @@
 module Lib
   ( len,
     digits,
+    fibs,
     fibN,
   )
 where
 
-import Data.List.Split
+import Data.List.Split (divvy)
 
 len :: Floating a => [a] -> a
 len = sqrt . sum . map (^ 2)
@@ -19,8 +20,11 @@ digits x
     digs 0 = []
     digs x = digs (x `div` 10) ++ [x `mod` 10]
 
-fibN = (fibs !!)
+fibs :: [Integer]
+fibs = 0 : 1 : do rest
   where
-    fibs = 0 : 1 : do rest
     rest = map next1 $ divvy 2 1 fibs
     next1 [a, b] = a + b
+
+fibN :: Int -> Integer
+fibN = (fibs !!)
