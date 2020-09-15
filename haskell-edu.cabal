@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 498886de3dad21979f17d1a1df35a2d578f579c1c50c92d51aa688f148159fdc
+-- hash: 493c3239e9ddfbd72041cadc599714bc0df67503f6de54316741ef9b631f69d1
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -46,6 +46,7 @@ executable haskell-edu-exe
   build-depends:
       base >=4.7 && <5
     , haskell-edu
+    , split
   default-language: Haskell2010
 
 test-suite haskell-edu-test
