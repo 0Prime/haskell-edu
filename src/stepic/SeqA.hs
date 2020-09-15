@@ -1,5 +1,6 @@
 import Data.List.Split (divvy)
 
+seqA :: Int -> Integer
 seqA = (seq !!)
   where
     seq = 1 : 2 : 3 : do rest
