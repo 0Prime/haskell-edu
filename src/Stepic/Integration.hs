@@ -1,3 +1,5 @@
+module Stepic.Integration where
+
 integration :: (Double -> Double) -> Double -> Double -> Double
 integration f a b
   | a - b == 0 = 0

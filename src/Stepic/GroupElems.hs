@@ -1,3 +1,5 @@
+module Stepic.GroupElems where
+
 groupElems :: Eq a => [a] -> [[a]]
 groupElems xs = foldl f [] xs
   where

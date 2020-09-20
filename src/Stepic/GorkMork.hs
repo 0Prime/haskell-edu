@@ -1,3 +1,5 @@
+module Stepic.GorkMork where
+
 class KnownToGork a where
   stomp :: a -> a
   doesEnrageGork :: a -> Bool

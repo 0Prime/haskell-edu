@@ -1,3 +1,5 @@
+module Stepic.SeqA where
+
 import Data.List.Split (divvy)
 
 seqA :: Int -> Integer

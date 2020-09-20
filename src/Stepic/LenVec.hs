@@ -1,3 +1,5 @@
+module Stepic.LenVec where
+
 import Lib
 
 lenVec3 :: Floating a => a -> a -> a -> a
