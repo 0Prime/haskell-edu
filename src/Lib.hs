@@ -3,6 +3,7 @@ module Lib
     digits,
     fibs,
     fibN,
+    perms,
   )
 where
 
@@ -28,3 +29,9 @@ fibs = 0 : 1 : do rest
 
 fibN :: Int -> Integer
 fibN = (fibs !!)
+
+perms :: [a] -> [[a]]
+perms = foldr (concatMap . insertions) [[]]
+  where
+    insertions x [] = [[x]]
+    insertions x list@(y : ys) = (x : list) : map (y :) (insertions x ys)
