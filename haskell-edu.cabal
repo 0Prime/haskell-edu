@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ab30fa14700426ff62290866e6f282572cf13e22058c37669851047bf2ec6ae9
+-- hash: fb7946cde8c605267371ff857b9e9db96a6b8e4ad0cf12cd7badcbd9390f02d3
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -42,6 +42,8 @@ library
   build-depends:
       base >=4.7 && <5
     , cond
+    , hspec
+    , hspec-tables
     , split
   default-language: Haskell2010
 
@@ -56,6 +58,8 @@ executable haskell-edu-exe
       base >=4.7 && <5
     , cond
     , haskell-edu
+    , hspec
+    , hspec-tables
     , split
   default-language: Haskell2010
 
@@ -72,5 +76,7 @@ test-suite haskell-edu-test
       base >=4.7 && <5
     , cond
     , haskell-edu
+    , hspec
+    , hspec-tables
     , split
   default-language: Haskell2010
