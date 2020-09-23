@@ -15,3 +15,13 @@ spec = parallel $ do
         ("ab", "c", ["ac", "bc"])
       ]
       (\v t e -> insert v t `shouldBe` e)
+
+  describe "shrink" $ do
+    byExample
+      ("threshold", "values", "expected")
+      [ (1, [], []),
+        (1, [[1]], [[1]]),
+        (1, [[1], [2]], [[1]]),
+        (2, [[1, 1], [1, 2]], [[1, 1]])
+      ]
+      (\t vs e -> shrink t vs `shouldBe` e)
