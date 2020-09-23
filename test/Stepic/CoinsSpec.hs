@@ -25,3 +25,12 @@ spec = parallel $ do
         (2, [[1, 1], [1, 2]], [[1, 1]])
       ]
       (\t vs e -> shrink t vs `shouldBe` e)
+
+  describe "split" $ do
+    byExample
+      ("threshold", "values", "expected")
+      [ (3, [[1]], ([], [[1]])),
+        (3, [[5], [3], [2]], ([[3]], [[5], [2]])),
+        (5, [[5], [2, 3], [3, 2]], ([[5], [2, 3], [3, 2]], []))
+      ]
+      (\p vs e -> split p vs `shouldBe` e)
