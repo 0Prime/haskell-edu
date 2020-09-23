@@ -5,18 +5,22 @@ import Data.List (partition)
 insert :: [a] -> [a] -> [[a]]
 insert values target = map (\v -> v : target) values
 
-shrink :: Int -> [[Int]] -> [[Int]]
+shrink :: (Ord a, Num a) => a -> [[a]] -> [[a]]
 shrink n = filter (\xs -> sum xs <= n)
 
-split :: Int -> [[Int]] -> ([[Int]], [[Int]])
+split :: (Eq a, Num a) => a -> [[a]] -> ([[a]], [[a]])
 split n xss = partition (\xs -> sum xs == n) xss
 
-change :: [Int] -> Int -> [[Int]]
-change coins n = generate $ splitter $ nextGen []
+change' :: (Ord a, Num a) => [a] -> a -> [[a]]
+change' cs n = generate $ splitter $ nextGen []
   where
-    generate :: ([[Int]], [[Int]]) -> [[Int]]
     generate (xss, []) = xss
     generate (xss, yss) = xss ++ (generate $ splitter $ yss >>= nextGen)
-    nextGen = (shrink n) . inserter
-    inserter = insert coins
+    nextGen = (shrink n) . (insert cs)
     splitter = split n
+
+change :: (Ord a, Num a) => a -> [[a]]
+change n = change' coins n
+
+coins :: (Num a) => [a]
+coins = [2, 3, 4]

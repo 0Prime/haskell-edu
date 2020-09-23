@@ -35,7 +35,7 @@ spec = parallel $ do
       ]
       (\p vs e -> split p vs `shouldBe` e)
 
-  describe "change" $ do
+  describe "change'" $ do
     byExample
       ("coins", "sum", "expected")
       [ ([1], 1, [[1]]),
@@ -44,4 +44,4 @@ spec = parallel $ do
         ([2, 3, 5, 7], 5, [[5], [3, 2], [2, 3]]),
         ([2, 3, 7], 7, [[7], [3, 2, 2], [2, 3, 2], [2, 2, 3]])
       ]
-      (\c s e -> change c s `shouldBe` e)
+      (\c s e -> change' c s `shouldBe` e)
