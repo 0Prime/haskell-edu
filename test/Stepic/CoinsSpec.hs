@@ -1,5 +1,6 @@
 module Stepic.CoinsSpec (spec) where
 
+import Data.Set (fromList)
 import Stepic.Coins
 import Test.Hspec
 import Test.Hspec.Tables (byExample)
@@ -35,13 +36,23 @@ spec = parallel $ do
       ]
       (\p vs e -> split p vs `shouldBe` e)
 
-  describe "change'" $ do
-    byExample
-      ("coins", "sum", "expected")
-      [ ([1], 1, [[1]]),
-        ([1], 2, [[1, 1]]),
-        ([2, 3], 5, [[3, 2], [2, 3]]),
-        ([2, 3, 5, 7], 5, [[5], [3, 2], [2, 3]]),
-        ([2, 3, 7], 7, [[7], [3, 2, 2], [2, 3, 2], [2, 2, 3]])
-      ]
-      (\c s e -> change' c s `shouldBe` e)
+  tableTest "change0" change0
+  tableTest "change1" change1
+  tableTest "change2" change2
+  tableTest "change3" change3
+
+tableTest text fn =
+  describe text $ do
+    makeTest fn
+
+makeTest f =
+  byExample
+    ("coins", "sum", "expected")
+    [ ([1], 1, [[1]]),
+      ([2], 1, []),
+      ([1], 2, [[1, 1]]),
+      ([2, 3], 5, [[3, 2], [2, 3]]),
+      ([2, 3, 5, 7], 5, [[5], [3, 2], [2, 3]]),
+      ([2, 3, 7], 7, [[7], [3, 2, 2], [2, 3, 2], [2, 2, 3]])
+    ]
+    (\c s e -> fromList (f c s) `shouldBe` (fromList e))

@@ -25,6 +25,7 @@ dependencies:
 - cond
 - hspec
 - hspec-tables
+- containers
 
 library:
   source-dirs: src
