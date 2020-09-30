@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 33d039555fc523c6a8a00fb57240eada0276c9e394072d00330c5796821a5a71
+-- hash: a5dac799d441856655d23909158e41d37c4d16da2fa20932e8c81a942b04d430
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -34,6 +34,7 @@ library
       Stepic.GroupElems
       Stepic.Integration
       Stepic.LenVec
+      Stepic.Point
       Stepic.Rev
       Stepic.SeqA
   other-modules:
