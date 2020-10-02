@@ -24,7 +24,7 @@ spec = parallel $ do
     (\i e -> (integer2z i) `shouldBe` e)
 
   byExample
-    ("Int", "meh")
+    ("Int", "int -> z -> int")
     [ (0, 0),
       (1, 0),
       (5, 0),
