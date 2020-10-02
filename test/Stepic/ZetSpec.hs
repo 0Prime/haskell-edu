@@ -7,7 +7,7 @@ import Test.Hspec.Tables (byExample)
 spec :: Spec
 spec = parallel $ do
   byExample
-    ("Z", "expected")
+    ("Z", "z2i")
     [ (zero, 0),
       (Z Plus [One], 1),
       (Z Plus [Zero, One], 2),
@@ -17,7 +17,7 @@ spec = parallel $ do
     (\z e -> z2i z `shouldBe` e)
 
   byExample
-    ("Int", "expected")
+    ("Int", "i2z")
     [ (0, zero),
       (1, Z Plus [One])
     ]

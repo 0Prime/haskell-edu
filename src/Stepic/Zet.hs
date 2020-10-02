@@ -10,6 +10,8 @@ module Stepic.Zet
   )
 where
 
+import Data.Function ((&))
+import Data.Functor ((<&>))
 import Lib
 
 data Bit = Zero | One deriving (Show, Eq)
@@ -19,33 +21,30 @@ data Sign = Minus | Plus deriving (Show, Eq)
 data Z = Z Sign [Bit] deriving (Show, Eq)
 
 add :: Z -> Z -> Z
-add a b = i2z $ z2i a + z2i b
+add a b = z2i a + z2i b & i2z
 
 mul :: Z -> Z -> Z
-mul a b = i2z $ z2i a * z2i b
+mul a b = z2i a * z2i b & i2z
 
-bit2num :: Num p => Bit -> p
-bit2num Zero = 0
-bit2num One = 1
+bit2num :: Num n => Bit -> n
+bit2num b = if b == Zero then 0 else 1
 
-num2bit :: (Eq a, Num a) => a -> Bit
-num2bit 0 = Zero
-num2bit 1 = One
+num2bit :: (Eq n, Num n) => n -> Bit
+num2bit n = if n == 0 then Zero else One
 
-toSignum :: Num p => Sign -> p
-toSignum Minus = -1
-toSignum Plus = 1
+toSignum :: Num n => Sign -> n
+toSignum s = if s == Minus then (-1) else 1
 
-toSign :: (Ord a, Num a) => a -> Sign
+toSign :: (Ord n, Num n) => n -> Sign
 toSign n = if signum n >= 0 then Plus else Minus
 
 z2i :: Z -> Integer
-z2i (Z s xs) = toSignum s * (sum $ zipWith (*) nums powersOftwo)
+z2i (Z s xs) = toSignum s * (nums & zipWith (*) powersOftwo & sum)
   where
-    nums = bit2num <$> xs
-    powersOftwo = (2 ^) <$> [0 ..]
+    nums = xs <&> bit2num
+    powersOftwo = [0 ..] <&> (2 ^)
 
 i2z :: Integer -> Z
-i2z n = Z (toSign n) $ reverse $ dropWhile (== Zero) $ map num2bit $ digits 2 $ abs n
+i2z n = n & digits 2 & map num2bit & dropWhile (== Zero) & reverse & Z (toSign n)
 
 zero = Z Plus []
