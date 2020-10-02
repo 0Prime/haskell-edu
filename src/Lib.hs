@@ -12,14 +12,14 @@ import Data.List.Split (divvy)
 len :: Floating a => [a] -> a
 len = sqrt . sum . map (^ 2)
 
-digits :: Integral a => a -> [a]
-digits x
+digits :: Integral a => a -> a -> [a]
+digits b x
   | x == 0 = [0]
-  | x < 0 = digits $ abs x
+  | x < 0 = digits b $ abs x
   | otherwise = digs x
   where
     digs 0 = []
-    digs x = digs (x `div` 10) ++ [x `mod` 10]
+    digs x = digs (x `div` b) ++ [x `mod` b]
 
 fibs :: [Integer]
 fibs = 0 : 1 : do rest
