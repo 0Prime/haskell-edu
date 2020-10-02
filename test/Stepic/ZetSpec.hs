@@ -35,3 +35,25 @@ spec = parallel $ do
       ((-42), 0)
     ]
     (\n _ -> (z2integer . integer2z) n `shouldBe` n)
+
+  byExample
+    ("x", "y", "sum")
+    [ (0, 0, 0),
+      (0, 1, 1),
+      (2, 40, 42),
+      (0, (-1), (-1)),
+      (1, (-1), (0)),
+      ((-5), 4, (-1))
+    ]
+    (\x y s -> z2integer ((integer2z x) `add` (integer2z y)) `shouldBe` s)
+
+  byExample
+    ("x", "y", "mul")
+    [ (0, 0, 0),
+      (0, 1, 0),
+      (42, 1, 42),
+      ((-1), 1, (-1)),
+      ((-1), 0, (0)),
+      (5, 10, 50)
+    ]
+    (\x y s -> z2integer ((integer2z x) `mul` (integer2z y)) `shouldBe` s)
