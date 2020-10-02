@@ -14,14 +14,14 @@ spec = parallel $ do
       (Z Plus [One, One], 3),
       (Z Plus [Zero, Zero, One], 4)
     ]
-    (\z e -> z2integer z `shouldBe` e)
+    (\z e -> z2i z `shouldBe` e)
 
   byExample
     ("Int", "expected")
     [ (0, zero),
       (1, Z Plus [One])
     ]
-    (\i e -> (integer2z i) `shouldBe` e)
+    (\i e -> i2z i `shouldBe` e)
 
   byExample
     ("Int", "int -> z -> int")
@@ -34,7 +34,7 @@ spec = parallel $ do
       ((-3), 0),
       ((-42), 0)
     ]
-    (\n _ -> (z2integer . integer2z) n `shouldBe` n)
+    (\n _ -> (z2i . i2z) n `shouldBe` n)
 
   byExample
     ("x", "y", "sum")
@@ -45,7 +45,7 @@ spec = parallel $ do
       (1, (-1), (0)),
       ((-5), 4, (-1))
     ]
-    (\x y s -> z2integer ((integer2z x) `add` (integer2z y)) `shouldBe` s)
+    (\x y s -> z2i (i2z x `add` i2z y) `shouldBe` s)
 
   byExample
     ("x", "y", "mul")
@@ -56,4 +56,4 @@ spec = parallel $ do
       ((-1), 0, (0)),
       (5, 10, 50)
     ]
-    (\x y s -> z2integer ((integer2z x) `mul` (integer2z y)) `shouldBe` s)
+    (\x y s -> z2i (i2z x `mul` i2z y) `shouldBe` s)
