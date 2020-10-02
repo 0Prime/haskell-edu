@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a5dac799d441856655d23909158e41d37c4d16da2fa20932e8c81a942b04d430
+-- hash: a98fc9542db4420732d485792434b4c30c5e883067c7fcef4759ed5a905cf9af
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -37,6 +37,7 @@ library
       Stepic.Point
       Stepic.Rev
       Stepic.SeqA
+      Stepic.Zet
   other-modules:
       Paths_haskell_edu
   hs-source-dirs:
@@ -73,6 +74,7 @@ test-suite haskell-edu-test
   other-modules:
       Stepic.CoinsSpec
       Stepic.RevSpec
+      Stepic.ZetSpec
       Paths_haskell_edu
   hs-source-dirs:
       test
