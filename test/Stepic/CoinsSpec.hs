@@ -55,4 +55,4 @@ makeTest f =
       ([2, 3, 5, 7], 5, [[5], [3, 2], [2, 3]]),
       ([2, 3, 7], 7, [[7], [3, 2, 2], [2, 3, 2], [2, 2, 3]])
     ]
-    (\c s e -> fromList (f c s) `shouldBe` (fromList e))
+    (\c s e -> fromList (f c s) `shouldBe` fromList e)

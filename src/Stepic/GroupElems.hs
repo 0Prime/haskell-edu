@@ -1,7 +1,7 @@
 module Stepic.GroupElems where
 
 groupElems :: Eq a => [a] -> [[a]]
-groupElems xs = foldl f [] xs
+groupElems = foldl f []
   where
     f [] x = [[x]]
     f acc@(ms : mss) x = if x `elem` ms then (x : ms) : mss else [x] : acc

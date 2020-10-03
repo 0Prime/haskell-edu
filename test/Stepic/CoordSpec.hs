@@ -37,4 +37,4 @@ spec = parallel $ do
   x1 `f` x2 >> y1 `f` y2
   where
     f a b = assertApproxEqual msg 0.00001 b a
-    msg = (show c1 ++ " ~= " ++ show c2)
+    msg = show c1 ++ " ~= " ++ show c2
