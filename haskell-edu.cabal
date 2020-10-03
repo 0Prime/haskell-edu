@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a98fc9542db4420732d485792434b4c30c5e883067c7fcef4759ed5a905cf9af
+-- hash: 6c26f95cdc00eb5e1054b7cfbc45b99de70e609471d0e84040059d76494317e1
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
   exposed-modules:
       Lib
       Stepic.Coins
+      Stepic.Coord
       Stepic.Dist
       Stepic.GorkMork
       Stepic.GroupElems
@@ -43,7 +44,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
     , cond
     , containers
     , hspec
@@ -59,7 +61,8 @@ executable haskell-edu-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
     , cond
     , containers
     , haskell-edu
@@ -73,6 +76,7 @@ test-suite haskell-edu-test
   main-is: Spec.hs
   other-modules:
       Stepic.CoinsSpec
+      Stepic.CoordSpec
       Stepic.RevSpec
       Stepic.ZetSpec
       Paths_haskell_edu
@@ -80,7 +84,8 @@ test-suite haskell-edu-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
     , cond
     , containers
     , haskell-edu
