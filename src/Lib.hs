@@ -12,6 +12,9 @@ import Data.List.Split (divvy)
 len :: Floating a => [a] -> a
 len = sqrt . sum . map (^ 2)
 
+manhLen :: [Int] -> Int
+manhLen = sum . map abs
+
 digits :: Integral a => a -> a -> [a]
 digits b x
   | x == 0 = [0]
