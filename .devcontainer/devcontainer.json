@@ -12,7 +12,8 @@
 		"jcanero.hoogle-vscode",
 		"2gua.rainbow-brackets",
 		"albert.tabout",
-		"hoovercj.haskell-linter"
+		"hoovercj.haskell-linter",
+		"josedanield.haskell-pointfree"
 	]
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
