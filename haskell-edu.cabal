@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: de723802ab8f0548cbc6d1804d2ad0d03c72a5e6c3ff699660388201389bb5d4
+-- hash: 8ecd0a376f2f40f1b32321c86082f69d0fcc3577549833d72678531e626477aa
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -36,6 +36,7 @@ library
       Stepic.Integration
       Stepic.LenVec
       Stepic.MaybeList
+      Stepic.Person
       Stepic.Point
       Stepic.Rev
       Stepic.SeqA
@@ -49,9 +50,11 @@ library
     , base >=4.7 && <5
     , cond
     , containers
+    , either
     , hspec
     , hspec-tables
     , split
+    , text
   default-language: Haskell2010
 
 executable haskell-edu-exe
@@ -66,10 +69,12 @@ executable haskell-edu-exe
     , base >=4.7 && <5
     , cond
     , containers
+    , either
     , haskell-edu
     , hspec
     , hspec-tables
     , split
+    , text
   default-language: Haskell2010
 
 test-suite haskell-edu-test
@@ -78,6 +83,7 @@ test-suite haskell-edu-test
   other-modules:
       Stepic.CoinsSpec
       Stepic.CoordSpec
+      Stepic.PersonSpec
       Stepic.RevSpec
       Stepic.ZetSpec
       Paths_haskell_edu
@@ -89,8 +95,10 @@ test-suite haskell-edu-test
     , base >=4.7 && <5
     , cond
     , containers
+    , either
     , haskell-edu
     , hspec
     , hspec-tables
     , split
+    , text
   default-language: Haskell2010

@@ -26,6 +26,9 @@ dependencies:
 - HUnit-approx
 - hspec
 - hspec-tables
+- split
+- text
+- either
 - containers
 
 library:
