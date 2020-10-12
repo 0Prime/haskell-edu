@@ -2,7 +2,6 @@ module Stepic.PersonSpec (spec) where
 
 import Stepic.Person
 import Test.Hspec
-import Test.Hspec.Tables (byExample)
 
 spec :: Spec
 spec = parallel $ do
