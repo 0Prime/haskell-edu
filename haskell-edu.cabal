@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0a07d4805d57800f32948b8731ea077acbcbec46bbf0940e3ec6b9663c01f3fa
+-- hash: c124763f76a6458e2d4ae8e6310d48021a9c1c87011d473417453a868ac233be
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -35,6 +35,7 @@ library
       Stepic.GroupElems
       Stepic.Integration
       Stepic.LenVec
+      Stepic.Maplike
       Stepic.Maybe1
       Stepic.MaybeList
       Stepic.Person
@@ -84,6 +85,7 @@ test-suite haskell-edu-test
   other-modules:
       Stepic.CoinsSpec
       Stepic.CoordSpec
+      Stepic.MaplikeSpec
       Stepic.Maybe1Spec
       Stepic.PersonSpec
       Stepic.RevSpec
