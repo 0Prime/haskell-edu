@@ -1,5 +1,6 @@
 module Stepic.MaplikeSpec (spec) where
 
+import Data.Function ((&))
 import Stepic.Maplike
 import Test.Hspec
 import Prelude hiding (lookup)
@@ -48,3 +49,42 @@ spec = parallel $ do
 
       it "replaces value on key match" $ do
         insert 1 "b" (ListMap [(1, "a")]) `shouldBe` ListMap [(1, "b")]
+
+  describe "MapLike ArrwoMap" $ do
+    let nil = empty :: ArrowMap Int String
+    let get k xs = lookup k xs
+    let set k v xs = insert k v xs
+    let del k xs = delete k xs
+
+    it "lookup on empty is Nothing" $ do
+      nil & get 1 & (`shouldBe` Nothing)
+
+    it "insert k v & lookup k is Just v" $ do
+      nil & set 1 "a" & get 1 & (`shouldBe` Just "a")
+
+    it "empty & delete k & lookup k is Nothing" $ do
+      nil & del 1 & get 1 & (`shouldBe` Nothing)
+
+    it "set k v & del k & get k is Nothing" $ do
+      nil & set 1 "a" & del 1 & get 1 & (`shouldBe` Nothing)
+
+    it "set a1,b2 & del 1,2 is Nothing" $ do
+      nil & set 1 "a" & set 2 "b" & del 1 & del 2 & get 1 & (`shouldBe` Nothing)
+
+    it "set 1a & del 2 & get 1 is Just a" $ do
+      nil & set 1 "a" & del 2 & get 1 & (`shouldBe` Just "a")
+
+    it "set 1a & del 2 & get 2 is Just a" $ do
+      nil & set 1 "a" & del 2 & get 2 & (`shouldBe` Nothing)
+
+    it "get 3 on 1a,2b is Nothing" $ do
+      nil & set 1 "a" & set 2 "b" & get 3 & (`shouldBe` Nothing)
+
+    it "get 2 on 1a,2b is Just b" $ do
+      nil & set 1 "a" & set 2 "b" & get 2 & (`shouldBe` Just "b")
+
+    it "get 1 on 1a,2b is Just a" $ do
+      nil & set 1 "a" & set 2 "b" & get 1 & (`shouldBe` Just "a")
+
+    it "set 1a,1b & get 1 is Just b" $ do
+      nil & set 1 "a" & set 1 "b" & get 1 & (`shouldBe` Just "b")

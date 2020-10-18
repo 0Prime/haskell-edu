@@ -24,3 +24,16 @@ instance MapLike ListMap where
   insert k v = ListMap . ((k, v) :) . getListMap . delete k
 
   delete k = ListMap . L.deleteBy ((==) `on` fst) (k, undefined) . getListMap
+
+newtype ArrowMap k v = ArrowMap {getArrowMap :: k -> Maybe v}
+
+instance MapLike ArrowMap where
+  empty = ArrowMap $ const Nothing
+
+  lookup k = ($ k) . getArrowMap
+
+  insert k v (ArrowMap fs) =
+    ArrowMap $ \k' -> if k' == k then Just v else fs k'
+
+  delete k (ArrowMap fs) =
+    ArrowMap $ \k' -> if k' == k then Nothing else fs k'
