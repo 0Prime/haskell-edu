@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c124763f76a6458e2d4ae8e6310d48021a9c1c87011d473417453a868ac233be
+-- hash: 65179b9100ed21d064a9de372b5c301003e7c8e2b9aa540e53706181f692eee4
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -31,6 +31,7 @@ library
       Stepic.Coins
       Stepic.Coord
       Stepic.Dist
+      Stepic.Functors
       Stepic.GorkMork
       Stepic.GroupElems
       Stepic.Integration
