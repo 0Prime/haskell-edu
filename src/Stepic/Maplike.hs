@@ -21,8 +21,6 @@ instance MapLike ListMap where
 
   lookup k = L.lookup k . getListMap
 
-  insert k' v' = ListMap . L.foldr f [(k', v')] . getListMap
-    where
-      f (k, v) acc = if k == k' then acc else (k, v) : acc
+  insert k v = ListMap . ((k, v) :) . getListMap . delete k
 
   delete k = ListMap . L.deleteBy ((==) `on` fst) (k, undefined) . getListMap
