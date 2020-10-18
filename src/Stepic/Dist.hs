@@ -1,3 +1,5 @@
+module Stepic.Dist where
+
 import Lib
 
 dist :: (Double, Double) -> (Double, Double) -> Double

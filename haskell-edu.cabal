@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 498886de3dad21979f17d1a1df35a2d578f579c1c50c92d51aa688f148159fdc
+-- hash: c124763f76a6458e2d4ae8e6310d48021a9c1c87011d473417453a868ac233be
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -28,12 +28,35 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Stepic.Coins
+      Stepic.Coord
+      Stepic.Dist
+      Stepic.GorkMork
+      Stepic.GroupElems
+      Stepic.Integration
+      Stepic.LenVec
+      Stepic.Maplike
+      Stepic.Maybe1
+      Stepic.MaybeList
+      Stepic.Person
+      Stepic.Point
+      Stepic.Rev
+      Stepic.SeqA
+      Stepic.Zet
   other-modules:
       Paths_haskell_edu
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
+    , cond
+    , containers
+    , either
+    , hspec
+    , hspec-tables
+    , split
+    , text
   default-language: Haskell2010
 
 executable haskell-edu-exe
@@ -44,19 +67,42 @@ executable haskell-edu-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
+    , cond
+    , containers
+    , either
     , haskell-edu
+    , hspec
+    , hspec-tables
+    , split
+    , text
   default-language: Haskell2010
 
 test-suite haskell-edu-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Stepic.CoinsSpec
+      Stepic.CoordSpec
+      Stepic.MaplikeSpec
+      Stepic.Maybe1Spec
+      Stepic.PersonSpec
+      Stepic.RevSpec
+      Stepic.ZetSpec
       Paths_haskell_edu
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HUnit-approx
+    , base >=4.7 && <5
+    , cond
+    , containers
+    , either
     , haskell-edu
+    , hspec
+    , hspec-tables
+    , split
+    , text
   default-language: Haskell2010

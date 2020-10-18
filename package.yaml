@@ -21,6 +21,15 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- split
+- cond
+- HUnit-approx
+- hspec
+- hspec-tables
+- split
+- text
+- either
+- containers
 
 library:
   source-dirs: src
@@ -38,6 +47,8 @@ executables:
 
 tests:
   haskell-edu-test:
+    spec:
+      defaults: hspec/hspec@master
     main:                Spec.hs
     source-dirs:         test
     ghc-options:
