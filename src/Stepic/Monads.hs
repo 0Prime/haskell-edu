@@ -10,3 +10,6 @@ execLoggers a f1 f2 = Log (msg1 ++ msg2) c
   where
     Log msg1 b = f1 a
     Log msg2 c = f2 b
+
+returnLog :: a -> Log a
+returnLog = Log []
