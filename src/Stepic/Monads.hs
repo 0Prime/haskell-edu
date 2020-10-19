@@ -13,3 +13,6 @@ execLoggers a f1 f2 = Log (msg1 ++ msg2) c
 
 returnLog :: a -> Log a
 returnLog = Log []
+
+bindLog :: Log a -> (a -> Log b) -> Log b
+bindLog (Log msg1 a) f = (\(Log msg2 b) -> Log (msg1 ++ msg2) b) $ f a
