@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 65179b9100ed21d064a9de372b5c301003e7c8e2b9aa540e53706181f692eee4
+-- hash: 75fcc3c8cdb3bb3e27d107ebb3458e42d74198b280181f3c9899fb2be4ee31ed
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -39,6 +39,7 @@ library
       Stepic.Maplike
       Stepic.Maybe1
       Stepic.MaybeList
+      Stepic.Monads
       Stepic.Person
       Stepic.Point
       Stepic.Rev
