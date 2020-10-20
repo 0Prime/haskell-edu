@@ -1,6 +1,6 @@
 module Stepic.Monads where
 
-data Log a = Log [String] a
+data Log a = Log [String] a deriving (Show)
 
 toLogger :: (a -> b) -> String -> (a -> Log b)
 toLogger f msg = Log [msg] . f
@@ -27,3 +27,10 @@ instance Applicative Log where
 instance Monad Log where
   return = returnLog
   (>>=) = bindLog
+
+add1Log = toLogger (+ 1) "added one"
+
+mult2Log = toLogger (* 2) "multiplied by 2"
+
+execLoggersList :: a -> [a -> Log a] -> Log a
+execLoggersList = foldl (>>=) . return
