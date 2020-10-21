@@ -36,3 +36,15 @@ spec = parallel $ do
     it "works 2" $ do
       tokenize "1 + ( 7 - 2 )"
         `shouldBe` Just [Number 1, Plus, LeftBrace, Number 7, Minus, Number 2, RightBrace]
+
+  describe "pythagoreanTriple" $ do
+    it "non-positive numbers return empty list" $ do
+      pythagoreanTriple 0 `shouldBe` []
+      pythagoreanTriple (-1) `shouldBe` []
+
+    it "positive numbers work as expected" $ do
+      pythagoreanTriple 4 `shouldBe` []
+      pythagoreanTriple 5 `shouldBe` [(3, 4, 5)]
+      pythagoreanTriple 6 `shouldBe` [(3, 4, 5)]
+      pythagoreanTriple 9 `shouldBe` [(3, 4, 5)]
+      pythagoreanTriple 10 `shouldBe` [(3, 4, 5), (6, 8, 10)]
