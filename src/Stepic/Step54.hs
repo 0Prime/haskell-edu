@@ -1,4 +1,4 @@
-module Stepic.Step54 where
+module Stepic.Step54 (Token (..), asToken, tokenize) where
 
 import Text.Read (readMaybe)
 
@@ -15,3 +15,12 @@ asToken s = case s of
 
 tokenize :: String -> Maybe [Token]
 tokenize = mapM asToken . words
+
+data Board = Board
+
+nextPositions :: Board -> [Board]
+nextPositions = undefined
+
+nextPositionsN :: Board -> Int -> (Board -> Bool) -> [Board]
+nextPositionsN board turns pred =
+  filter pred $ iterate (>>= nextPositions) [board] !! turns
