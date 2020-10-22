@@ -30,6 +30,7 @@ dependencies:
 - text
 - either
 - containers
+- directory
 
 library:
   source-dirs: src

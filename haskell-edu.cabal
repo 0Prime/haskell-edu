@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1cbd6e02a2856d26cf6a09058280c454878d48add8b0fdc88c9789dba7f3501c
+-- hash: 270eb7b5b0e508088fb2d49f8ccf214948e94fbf1c248869cb300651427c1920
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -55,6 +55,7 @@ library
     , base >=4.7 && <5
     , cond
     , containers
+    , directory
     , either
     , hspec
     , hspec-tables
@@ -74,6 +75,7 @@ executable haskell-edu-exe
     , base >=4.7 && <5
     , cond
     , containers
+    , directory
     , either
     , haskell-edu
     , hspec
@@ -103,6 +105,7 @@ test-suite haskell-edu-test
     , base >=4.7 && <5
     , cond
     , containers
+    , directory
     , either
     , haskell-edu
     , hspec
