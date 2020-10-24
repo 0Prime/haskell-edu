@@ -1,5 +1,8 @@
 module Stepic.Monads where
 
+import Control.Monad (ap)
+import GHC.Base (liftM)
+
 data Log a = Log [String] a deriving (Show)
 
 toLogger :: (a -> b) -> String -> (a -> Log b)
@@ -34,3 +37,19 @@ mult2Log = toLogger (* 2) "multiplied by 2"
 
 execLoggersList :: a -> [a -> Log a] -> Log a
 execLoggersList = foldl (>>=) . return
+
+newtype Reader' r a = Reader' {runReader :: r -> a}
+
+instance Applicative (Reader' m) where
+  pure = return
+  (<*>) = ap
+
+instance Functor (Reader' m) where
+  fmap = liftM
+
+instance Monad (Reader' r) where
+  return x = Reader' $ const x
+  m >>= k = Reader' $ \r -> runReader (k (runReader m r)) r
+
+local' :: (r -> r') -> Reader' r' a -> Reader' r a
+local' f m = Reader' $ runReader m . f
