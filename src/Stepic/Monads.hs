@@ -53,3 +53,12 @@ instance Monad (Reader' r) where
 
 local' :: (r -> r') -> Reader' r' a -> Reader' r a
 local' f m = Reader' $ runReader m . f
+
+type User = String
+
+type Password = String
+
+type UsersTable = [(User, Password)]
+
+usersWithBadPasswords :: Reader' UsersTable [User]
+usersWithBadPasswords = Reader' $ fmap fst . filter (("123456" ==) . snd)
