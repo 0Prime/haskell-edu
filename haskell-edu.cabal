@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 270eb7b5b0e508088fb2d49f8ccf214948e94fbf1c248869cb300651427c1920
+-- hash: fefe68e7d9a706d815d6eab5df56e177941a71a7103e3bfef8be768f2442ba85
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -42,6 +42,7 @@ library
       Stepic.Monads
       Stepic.Person
       Stepic.Point
+      Stepic.Reader56
       Stepic.Rev
       Stepic.SeqA
       Stepic.Step54
@@ -59,8 +60,10 @@ library
     , either
     , hspec
     , hspec-tables
+    , mtl
     , split
     , text
+    , transformers
   default-language: Haskell2010
 
 executable haskell-edu-exe
@@ -80,8 +83,10 @@ executable haskell-edu-exe
     , haskell-edu
     , hspec
     , hspec-tables
+    , mtl
     , split
     , text
+    , transformers
   default-language: Haskell2010
 
 test-suite haskell-edu-test
@@ -110,6 +115,8 @@ test-suite haskell-edu-test
     , haskell-edu
     , hspec
     , hspec-tables
+    , mtl
     , split
     , text
+    , transformers
   default-language: Haskell2010

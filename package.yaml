@@ -31,6 +31,8 @@ dependencies:
 - either
 - containers
 - directory
+- transformers
+- mtl
 
 library:
   source-dirs: src
