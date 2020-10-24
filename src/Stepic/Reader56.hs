@@ -2,7 +2,7 @@ module Stepic.Reader56 where
 
 import Control.Monad.Writer
 
-type Shopping = Writer (Sum Integer) ()
+type Shopping = Writer ([String], Sum Integer) ()
 
 shopping1 :: Shopping
 shopping1 = do
@@ -11,7 +11,10 @@ shopping1 = do
   purchase "Lettuce" 328
 
 purchase :: String -> Integer -> Shopping
-purchase _ = tell . Sum
+purchase item cost = tell ([item], Sum cost)
 
 total :: Shopping -> Integer
-total = getSum . execWriter
+total = getSum . snd . execWriter
+
+items :: Shopping -> [String]
+items = fst . execWriter
