@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fefe68e7d9a706d815d6eab5df56e177941a71a7103e3bfef8be768f2442ba85
+-- hash: b4d99aafc9f19e3ae4b1d9a9090b522e964940929b49dc95659f3ed73f76a61c
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -45,6 +45,7 @@ library
       Stepic.Reader56
       Stepic.Rev
       Stepic.SeqA
+      Stepic.State58
       Stepic.Step54
       Stepic.Zet
   other-modules:
