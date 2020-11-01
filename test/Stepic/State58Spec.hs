@@ -20,3 +20,7 @@ spec = parallel $ do
   describe "numberTree'" $ do
     test1 numberTree'
     test2 numberTree'
+
+  describe "numberTree''" $ do
+    test1 numberTree''
+    test2 numberTree''

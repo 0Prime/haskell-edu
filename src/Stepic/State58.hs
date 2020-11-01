@@ -42,6 +42,16 @@ numberTree' tree = evalState (number tree) 1
       r' <- number r
       return (Fork l' i r')
 
+numberTree'' :: Tree () -> Tree Integer
+numberTree'' tree = fst $ helper tree 1
+  where
+    helper :: Tree () -> Integer -> (Tree Integer, Integer)
+    helper (Leaf _) n = (Leaf n, n + 1)
+    helper (Fork l _ r) n = (Fork l' n' r', n'')
+      where
+        (l', n') = helper l n
+        (r', n'') = helper r (n' + 1)
+
 tick :: a -> State Integer Integer
 tick _ = do
   n <- get
