@@ -22,10 +22,25 @@ execStateN :: Int -> State s a -> s -> s
 execStateN n = execState . replicateM_ n
 
 data Tree a = Leaf a | Fork (Tree a) a (Tree a)
-  deriving (Show, Eq, Functor, Foldable, Traversable)
+  deriving (Show, Eq, Traversable, Foldable, Functor)
 
 numberTree :: Tree () -> Tree Integer
 numberTree tree = evalState (traverse tick tree) 1
+
+numberTree' :: Tree () -> Tree Integer
+numberTree' tree = evalState (number tree) 1
+  where
+    number :: Tree () -> State Integer (Tree Integer)
+    number (Leaf _) = do
+      i <- get
+      modify (+ 1)
+      return (Leaf i)
+    number (Fork l _ r) = do
+      l' <- number l
+      i <- get
+      modify (+ 1)
+      r' <- number r
+      return (Fork l' i r')
 
 tick :: a -> State Integer Integer
 tick _ = do
