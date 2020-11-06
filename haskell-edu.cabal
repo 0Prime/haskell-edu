@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b5dbe5c58214d969712b1c1fad1cc90aabd02b75b0936f46c051aa422073d716
+-- hash: b4743b32d6071a1f36462f951bcab260beb5d434e3055a0c969d1757574c54dc
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -49,6 +49,7 @@ library
       Stepic.Step54
       Stepic.Zet
       Stepic2.Arr23
+      Stepic2.Step12
       Stepic2.Triple11
   other-modules:
       Paths_haskell_edu
@@ -105,6 +106,7 @@ test-suite haskell-edu-test
       Stepic.State58Spec
       Stepic.Step54Spec
       Stepic.ZetSpec
+      Stepic2.Step12Spec
       Paths_haskell_edu
   hs-source-dirs:
       test
