@@ -25,3 +25,11 @@ spec = parallel $ do
       (\a b c d -> 2 * a + 3 * b + 5 * c -4 * d)
         >$< x1s >*< x2s >*< x3s >*< x4s
           `shouldBe` [9, 15, 21]
+
+  describe "dividelist" $ do
+    it "test 1" $ do
+      divideList [3, 4, 5] `shouldBe` 3.75
+
+  describe "dividelist'" $ do
+    it "test 1" $ do
+      divideList' [3, 4, 5] `shouldBe` ("<-3.0/<-4.0/<-5.0/1.0", 3.75)
