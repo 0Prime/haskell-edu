@@ -1,5 +1,8 @@
+{-# LANGUAGE RankNTypes #-}
+
 module Stepic2.Step12Spec (spec) where
 
+import Control.Applicative (ZipList (ZipList))
 import Stepic2.Step12
 import Test.Hspec
 
@@ -33,3 +36,25 @@ spec = parallel $ do
   describe "dividelist'" $ do
     it "test 1" $ do
       divideList' [3, 4, 5] `shouldBe` ("<-3.0/<-4.0/<-5.0/1.0", 3.75)
+
+  describe "<**> and <*?>" $ do
+    let test msg l r = it msg $ do
+          l <**> r `shouldBe` l <*?> r
+
+    let testFail msg l r = it msg $ do
+          l <**> r `shouldNotBe` l <*?> r
+
+    let testFn msg l r x = it msg $ do
+          (l <**> r) x `shouldBe` (l <*?> r) x
+
+    test "Maybe" (Just 5) (Just (+ 2))
+
+    testFail "List" [1, 1] [id, (+ 1)]
+
+    test "ZipList" (ZipList [1, 1]) (ZipList [id, (+ 1)])
+
+    testFail "Either" (Left "A") (Left "B" :: Either String (Int -> Int))
+
+    testFail "Pair" ("A", 3) ("B", (+ 1))
+
+    testFn "Partial function" length (const (+ 5)) [1, 2]
