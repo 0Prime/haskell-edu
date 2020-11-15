@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b4743b32d6071a1f36462f951bcab260beb5d434e3055a0c969d1757574c54dc
+-- hash: 5f8594e52fbc1d8063e27f91832b4e1a0ee2213bda57e0a6725d543f466a3b7d
 
 name:           haskell-edu
 version:        0.1.0.0
@@ -50,6 +50,7 @@ library
       Stepic.Zet
       Stepic2.Arr23
       Stepic2.Step12
+      Stepic2.Step13
       Stepic2.Triple11
   other-modules:
       Paths_haskell_edu
@@ -63,8 +64,10 @@ library
     , directory
     , either
     , hspec
+    , hspec-parsec
     , hspec-tables
     , mtl
+    , parsec
     , split
     , text
     , transformers
@@ -86,8 +89,10 @@ executable haskell-edu-exe
     , either
     , haskell-edu
     , hspec
+    , hspec-parsec
     , hspec-tables
     , mtl
+    , parsec
     , split
     , text
     , transformers
@@ -107,6 +112,7 @@ test-suite haskell-edu-test
       Stepic.Step54Spec
       Stepic.ZetSpec
       Stepic2.Step12Spec
+      Stepic2.Step13Spec
       Paths_haskell_edu
   hs-source-dirs:
       test
@@ -120,8 +126,10 @@ test-suite haskell-edu-test
     , either
     , haskell-edu
     , hspec
+    , hspec-parsec
     , hspec-tables
     , mtl
+    , parsec
     , split
     , text
     , transformers

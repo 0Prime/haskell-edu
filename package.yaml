@@ -33,6 +33,8 @@ dependencies:
 - directory
 - transformers
 - mtl
+- parsec
+- hspec-parsec
 
 library:
   source-dirs: src
