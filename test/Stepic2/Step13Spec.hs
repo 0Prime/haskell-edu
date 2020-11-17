@@ -21,3 +21,12 @@ spec = parallel $ do
 
     it "fails on double ';'" $ do
       getListTest `shouldFailOn` "1;;234;56"
+
+  describe "ignoreBraces" $ do
+    let lBrace = string "[["
+        rBrace = string "]]"
+        body = many1 letter
+        ignoreBracesTest = parse (ignoreBraces lBrace rBrace body) ""
+
+    it "test 1" $ do
+      ignoreBracesTest "[[ABC]]DEF" `shouldParse` "ABC"
