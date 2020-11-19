@@ -16,7 +16,8 @@ spec = parallel $ do
     it "test 3" $ do
       runPrs anyChr "" `shouldBe` Nothing
 
-    it "test 4" $ do
+  describe "Prs as Functor" $ do
+    it "test 1" $ do
       runPrs (digitToInt <$> anyChr) "BCD"
         `shouldBe` Just (11, "CD")
 
