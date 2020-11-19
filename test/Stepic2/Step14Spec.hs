@@ -19,3 +19,12 @@ spec = parallel $ do
     it "test 4" $ do
       runPrs (digitToInt <$> anyChr) "BCD"
         `shouldBe` Just (11, "CD")
+
+  describe "Prs as Applicative" $ do
+    it "test 1" $ do
+      runPrs ((,,) <$> anyChr <*> anyChr <*> anyChr) "ABCDE"
+        `shouldBe` Just (('A', 'B', 'C'), "DE")
+
+    it "test 2" $ do
+      runPrs (anyChr *> anyChr) "ABCDE"
+        `shouldBe` Just ('B', "CDE")
