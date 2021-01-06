@@ -29,3 +29,16 @@ spec = parallel $ do
     it "test 2" $ do
       runPrs (anyChr *> anyChr) "ABCDE"
         `shouldBe` Just ('B', "CDE")
+
+  describe "charE" $ do
+    it "test 1" $ do
+      runPrsE (charE 'A') "ABC"
+        `shouldBe` Right ('A', "BC")
+
+    it "test 2" $ do
+      runPrsE (charE 'A') "BCD"
+        `shouldBe` Left "unexpected B"
+
+    it "test 3" $ do
+      runPrsE (charE 'A') ""
+        `shouldBe` Left "unexpected end of input"

@@ -17,3 +17,16 @@ instance Applicative Prs where
 
 anyChr :: Prs Char
 anyChr = Prs uncons
+
+newtype PrsE a = PrsE {runPrsE :: String -> Either String (a, String)}
+
+satisfyE :: (Char -> Bool) -> PrsE Char
+satisfyE p = PrsE f
+  where
+    f "" = Left "unexpected end of input"
+    f (h : t)
+      | p h = Right (h, t)
+      | otherwise = Left ("unexpected " ++ [h])
+
+charE :: Char -> PrsE Char
+charE c = satisfyE (== c)
