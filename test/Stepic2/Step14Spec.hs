@@ -30,6 +30,21 @@ spec = parallel $ do
       runPrs (anyChr *> anyChr) "ABCDE"
         `shouldBe` Just ('B', "CDE")
 
+  describe "PrsE as Functor and Applicative" $ do
+    let anyE = satisfyE (const True)
+
+    it "test 1" $ do
+      runPrsE ((,) <$> anyE <* charE 'B' <*> anyE) "ABCDE"
+        `shouldBe` Right (('A', 'C'), "DE")
+
+    it "test 2" $ do
+      runPrsE ((,) <$> anyE <* charE 'C' <*> anyE) "ABCDE"
+        `shouldBe` Left "unexpected B"
+
+    it "test 3" $ do
+      runPrsE ((,) <$> anyE <* charE 'B' <*> anyE) "AB"
+        `shouldBe` Left "unexpected end of input"
+
   describe "charE" $ do
     it "test 1" $ do
       runPrsE (charE 'A') "ABC"
