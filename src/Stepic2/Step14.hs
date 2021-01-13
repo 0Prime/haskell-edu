@@ -2,6 +2,8 @@
 
 module Stepic2.Step14 where
 
+import Control.Applicative
+import Control.Monad
 import Data.List
 
 newtype Prs a = Prs {runPrs :: String -> Maybe (a, String)}
@@ -15,8 +17,23 @@ instance Applicative Prs where
     (a, s'') <- fr s'
     return (f' a, s'')
 
+instance Alternative Prs where
+  empty = Prs $ const Nothing
+  (Prs f1) <|> (Prs f2) = Prs $ liftM2 (<|>) f1 f2
+
 anyChr :: Prs Char
 anyChr = Prs uncons
+
+satisfy :: (Char -> Bool) -> Prs Char
+satisfy p = Prs f
+  where
+    f "" = Nothing
+    f (h : t)
+      | p h = Just (h, t)
+      | otherwise = Nothing
+
+char :: Char -> Prs Char
+char c = satisfy (== c)
 
 newtype PrsE a = PrsE {runPrsE :: String -> Either String (a, String)}
   deriving (Functor)

@@ -1,5 +1,6 @@
 module Stepic2.Step14Spec (spec) where
 
+import Control.Applicative
 import Data.Char
 import Stepic2.Step14
 import Test.Hspec
@@ -29,6 +30,19 @@ spec = parallel $ do
     it "test 2" $ do
       runPrs (anyChr *> anyChr) "ABCDE"
         `shouldBe` Just ('B', "CDE")
+
+  describe "Prs as Alternative" $ do
+    it "test 1" $ do
+      runPrs (char 'A' <|> char 'B') "ABC"
+        `shouldBe` Just ('A', "BC")
+
+    it "test 2" $ do
+      runPrs (char 'A' <|> char 'B') "BCD"
+        `shouldBe` Just ('B', "CD")
+
+    it "test 3" $ do
+      runPrs (char 'A' <|> char 'B') "CDE"
+        `shouldBe` Nothing
 
   describe "PrsE as Functor and Applicative" $ do
     let anyE = satisfyE (const True)
