@@ -35,6 +35,9 @@ satisfy p = Prs f
 char :: Char -> Prs Char
 char c = satisfy (== c)
 
+many1 :: Prs a -> Prs [a]
+many1 p = (:) <$> p <*> many p
+
 newtype PrsE a = PrsE {runPrsE :: String -> Either String (a, String)}
   deriving (Functor)
 

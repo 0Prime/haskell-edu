@@ -44,6 +44,27 @@ spec = parallel $ do
       runPrs (char 'A' <|> char 'B') "CDE"
         `shouldBe` Nothing
 
+  describe "many1" $ do
+    it "test1" $ do
+      runPrs (many1 $ char 'A') "A"
+        `shouldBe` Just ("A", "")
+
+    it "test2" $ do
+      runPrs (many1 $ char 'A') "AB"
+        `shouldBe` Just ("A", "B")
+
+    it "test3" $ do
+      runPrs (many1 $ char 'A') "AA"
+        `shouldBe` Just ("AA", "")
+
+    it "test4" $ do
+      runPrs (many1 $ char 'A') "AAA"
+        `shouldBe` Just ("AAA", "")
+
+    it "test5" $ do
+      runPrs (many1 $ char 'A') "AAB"
+        `shouldBe` Just ("AA", "B")
+
   describe "PrsE as Functor and Applicative" $ do
     let anyE = satisfyE (const True)
 
