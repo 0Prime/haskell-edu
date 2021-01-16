@@ -4,6 +4,7 @@ module Stepic2.Step14 where
 
 import Control.Applicative
 import Control.Monad
+import Data.Char (isDigit)
 import Data.List
 
 newtype Prs a = Prs {runPrs :: String -> Maybe (a, String)}
@@ -37,6 +38,9 @@ char c = satisfy (== c)
 
 many1 :: Prs a -> Prs [a]
 many1 p = (:) <$> p <*> many p
+
+nat :: Prs Int
+nat = fmap read $ many1 $ satisfy isDigit
 
 newtype PrsE a = PrsE {runPrsE :: String -> Either String (a, String)}
   deriving (Functor)

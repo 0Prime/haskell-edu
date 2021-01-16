@@ -65,6 +65,23 @@ spec = parallel $ do
       runPrs (many1 $ char 'A') "AAB"
         `shouldBe` Just ("AA", "B")
 
+  describe "nat" $ do
+    it "test1" $ do
+      runPrs nat "A" `shouldBe` Nothing
+
+    it "test2" $ do
+      runPrs nat "1" `shouldBe` Just (1, "")
+
+    it "test3" $ do
+      runPrs nat "11" `shouldBe` Just (11, "")
+
+    it "test4" $ do
+      runPrs nat "1A" `shouldBe` Just (1, "A")
+
+    it "test5" $ do
+      runPrs nat "123ABC"
+        `shouldBe` Just (123, "ABC")
+
   describe "PrsE as Functor and Applicative" $ do
     let anyE = satisfyE (const True)
 
