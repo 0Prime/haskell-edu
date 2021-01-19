@@ -8,3 +8,7 @@ instance Functor Triple where
 instance Applicative Triple where
   pure x = Tr x x x
   (Tr f g h) <*> (Tr x y z) = Tr (f x) (g y) (h z)
+
+instance Foldable Triple where
+  foldr f ini (Tr a b c) = foldr f ini [a, b, c]
+  foldl f ini (Tr a b c) = foldl f ini [a, b, c]
