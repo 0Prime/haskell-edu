@@ -1,5 +1,7 @@
 module Stepic2.Step21 where
 
+import Data.Monoid
+
 data Tree a = Nil | Branch (Tree a) a (Tree a) deriving (Eq, Show)
 
 newtype Preorder a = PreO (Tree a) deriving (Eq, Show)
@@ -34,3 +36,6 @@ flatten :: [Tree a] -> [a]
 flatten [] = []
 flatten (Nil : xs) = flatten xs
 flatten ((Branch l a r) : xs) = a : flatten (xs ++ [l, r])
+
+mkEndo :: Foldable t => t (a -> a) -> Endo a
+mkEndo = foldMap Endo

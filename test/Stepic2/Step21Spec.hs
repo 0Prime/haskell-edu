@@ -1,5 +1,6 @@
 module Stepic2.Step21Spec (spec) where
 
+import Data.Monoid
 import Stepic2.Step21
 import Stepic2.Triple11
 import Test.Hspec
@@ -46,3 +47,12 @@ spec = parallel $ do
       describe "Levelorder" $ do
         it "test 1" $ do
           verify LevelO [3, 1, 4, 2]
+
+  describe "mkEndo" $ do
+    it "test 1" $ do
+      appEndo (mkEndo [(+ 5), (* 3), (^ 2)]) 2
+        `shouldBe` 17
+
+    it "test 2" $ do
+      appEndo (mkEndo (42, (* 3))) 2
+        `shouldBe` 6
