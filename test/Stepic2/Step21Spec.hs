@@ -1,6 +1,7 @@
 module Stepic2.Step21Spec (spec) where
 
 import Data.Monoid
+import Stepic2.Step15
 import Stepic2.Step21
 import Stepic2.Triple11
 import Test.Hspec
@@ -56,3 +57,12 @@ spec = parallel $ do
     it "test 2" $ do
       appEndo (mkEndo (42, (* 3))) 2
         `shouldBe` 6
+
+  describe "|.| is Foldable" $ do
+    it "test 1" $ do
+      maximum (Cmps [Nothing, Just 2, Just 3])
+        `shouldBe` 3
+
+    it "test 2" $ do
+      length (Cmps [[1, 2], [], [3, 4, 5, 6, 7]])
+        `shouldBe` 7

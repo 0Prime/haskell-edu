@@ -1,6 +1,9 @@
+{-# LANGUAGE TypeOperators #-}
+
 module Stepic2.Step21 where
 
 import Data.Monoid
+import Stepic2.Step15
 
 data Tree a = Nil | Branch (Tree a) a (Tree a) deriving (Eq, Show)
 
@@ -39,3 +42,6 @@ flatten ((Branch l a r) : xs) = a : flatten (xs ++ [l, r])
 
 mkEndo :: Foldable t => t (a -> a) -> Endo a
 mkEndo = foldMap Endo
+
+instance (Foldable f, Foldable g) => Foldable (f |.| g) where
+  foldMap f (Cmps x) = (foldMap . foldMap) f x
