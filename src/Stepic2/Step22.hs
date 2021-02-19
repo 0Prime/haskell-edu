@@ -16,3 +16,17 @@ traverse2list f = foldr (\x y -> (:) <$> f x <*> y) (pure [])
 
 instance Traversable Triple where
   traverse f (Tr x y z) = Tr <$> f x <*> f y <*> f z
+
+data Result a = Ok a | Error String deriving (Eq, Show)
+
+instance Functor Result where
+  fmap f (Ok a) = Ok $ f a
+  fmap _ (Error s) = Error s
+
+instance Foldable Result where
+  foldr f b (Ok a) = f a b
+  foldr _ b _ = b
+
+instance Traversable Result where
+  traverse f (Ok a) = Ok <$> f a
+  traverse f (Error s) = pure $ Error s

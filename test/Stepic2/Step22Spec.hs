@@ -50,3 +50,13 @@ spec = parallel $ do
     it "test 4" $ do
       sequenceA (Tr (Tr 1 2 3) (Tr 4 5 6) (Tr 7 8 9))
         `shouldBe` Tr (Tr 1 4 7) (Tr 2 5 8) (Tr 3 6 9)
+
+  describe "Result" $ do
+    describe "is Traversable" $ do
+      it "test 1" $ do
+        traverse (\x -> [x + 2, x - 2]) (Ok 5)
+          `shouldBe` [Ok 7, Ok 3]
+
+      it "test 2" $ do
+        traverse (\x -> [x + 2, x - 2]) (Error "!!!")
+          `shouldBe` [Error "!!!"]
