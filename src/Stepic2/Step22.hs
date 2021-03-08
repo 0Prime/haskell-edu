@@ -1,6 +1,7 @@
 module Stepic2.Step22 where
 
 import Control.Applicative ((<*>))
+import Stepic2.Step21 (Tree (..))
 import Stepic2.Triple11
 
 sequenceA2list :: (Foldable t, Applicative f) => t (f a) -> f [a]
@@ -30,3 +31,11 @@ instance Foldable Result where
 instance Traversable Result where
   traverse f (Ok a) = Ok <$> f a
   traverse f (Error s) = pure $ Error s
+
+instance Traversable Tree where
+  traverse _ Nil = pure Nil
+  traverse g (Branch l a r) =
+    Branch
+      <$> traverse g l
+      <*> g a
+      <*> traverse g r

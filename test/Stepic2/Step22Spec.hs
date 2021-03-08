@@ -60,3 +60,27 @@ spec = parallel $ do
       it "test 2" $ do
         traverse (\x -> [x + 2, x - 2]) (Error "!!!")
           `shouldBe` [Error "!!!"]
+
+  describe "Tree" $ do
+    describe "is Functor" $ do
+      it "test 1" $ do
+        fmap (const 1) Nil `shouldBe` Nil
+
+    describe "is Traversable" $ do
+      it "test 1" $ do
+        traverse
+          (\x -> if odd x then Right x else Left x)
+          (Branch (Branch Nil 1 Nil) 3 Nil)
+          `shouldBe` Right (Branch (Branch Nil 1 Nil) 3 Nil)
+
+      it "test 2" $ do
+        traverse
+          (\x -> if odd x then Right x else Left x)
+          (Branch (Branch Nil 1 Nil) 2 Nil)
+          `shouldBe` Left 2
+
+      it "test 3" $ do
+        sequenceA (Branch (Branch Nil [1, 2] Nil) [3] Nil)
+          `shouldBe` [ Branch (Branch Nil 1 Nil) 3 Nil,
+                       Branch (Branch Nil 2 Nil) 3 Nil
+                     ]
