@@ -1,5 +1,6 @@
 module Stepic2.Step22Spec (spec) where
 
+import Stepic2.Step15
 import Stepic2.Step21
 import Stepic2.Step22
 import Stepic2.Triple11
@@ -84,3 +85,22 @@ spec = parallel $ do
           `shouldBe` [ Branch (Branch Nil 1 Nil) 3 Nil,
                        Branch (Branch Nil 2 Nil) 3 Nil
                      ]
+
+  describe "|.|" $ do
+    describe "is Traversable" $ do
+      let testCmps1 =
+            Cmps [Just (Right "2"), Nothing] ::
+              (|.|) [] Maybe (Either String String)
+
+      let testCmps2 =
+            Cmps [Just (Left "2"), Nothing] ::
+              (|.|) [] Maybe (Either String String)
+
+      it "test 1" $ do
+        sequenceA testCmps1
+          `shouldBe` Right
+            (Cmps {getCmps = [Just "2", Nothing]})
+
+      it "test 2" $ do
+        sequenceA testCmps2
+          `shouldBe` Left "2"

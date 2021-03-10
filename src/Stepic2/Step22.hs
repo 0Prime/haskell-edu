@@ -1,7 +1,11 @@
+{-# LANGUAGE TypeOperators #-}
+
 module Stepic2.Step22 where
 
-import Control.Applicative ((<*>))
-import Stepic2.Step21 (Tree (..))
+import Control.Applicative (Applicative (liftA2), liftA, (<*>))
+import Data.Functor.Compose
+import Stepic2.Step15
+import Stepic2.Step21
 import Stepic2.Triple11
 
 sequenceA2list :: (Foldable t, Applicative f) => t (f a) -> f [a]
@@ -39,3 +43,6 @@ instance Traversable Tree where
       <$> traverse g l
       <*> g a
       <*> traverse g r
+
+instance (Traversable f, Traversable g) => Traversable (f |.| g) where
+  traverse f (Cmps x) = Cmps <$> traverse (traverse f) x
