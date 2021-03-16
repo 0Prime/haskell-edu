@@ -29,3 +29,14 @@ spec = parallel $ do
       it "test 1" $ do
         traverse (\x -> [x + 2, x -2]) cnt1
           `shouldBe` [Un 44, Un 40]
+
+    describe "Temperature" $ do
+      describe "Kelvin to Celsius (k2c)" $ do
+        it "test 1" $ do
+          k2c 0 `shouldBe` Temperature (-273.15)
+
+        it "test 2" $ do
+          k2c 0 == Temperature (-273.15) `shouldBe` True
+
+        it "test 3" $ do
+          k2c 273.15 `shouldBe` Temperature 0.0
