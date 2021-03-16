@@ -1,5 +1,6 @@
 module Stepic2.Step22Spec (spec) where
 
+import Lib (Tree (..))
 import Stepic2.Step15
 import Stepic2.Step21
 import Stepic2.Step22

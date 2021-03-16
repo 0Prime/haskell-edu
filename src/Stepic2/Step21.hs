@@ -1,12 +1,10 @@
-{-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE TypeOperators #-}
 
 module Stepic2.Step21 where
 
 import Data.Monoid
+import Lib
 import Stepic2.Step15
-
-data Tree a = Nil | Branch (Tree a) a (Tree a) deriving (Eq, Show, Functor)
 
 newtype Preorder a = PreO (Tree a) deriving (Eq, Show)
 

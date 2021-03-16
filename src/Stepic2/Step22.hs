@@ -4,6 +4,7 @@ module Stepic2.Step22 where
 
 import Control.Applicative (Applicative (liftA2), liftA, (<*>))
 import Data.Functor.Compose
+import Lib (Tree (..))
 import Stepic2.Step15
 import Stepic2.Step21
 import Stepic2.Triple11

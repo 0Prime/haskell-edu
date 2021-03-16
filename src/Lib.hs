@@ -1,9 +1,12 @@
+{-# LANGUAGE DeriveFunctor #-}
+
 module Lib
   ( len,
     digits,
     fibs,
     fibN,
     perms,
+    Tree (..),
   )
 where
 
@@ -38,3 +41,5 @@ perms = foldr (concatMap . insertions) [[]]
   where
     insertions x [] = [[x]]
     insertions x list@(y : ys) = (x : list) : map (y :) (insertions x ys)
+
+data Tree a = Nil | Branch (Tree a) a (Tree a) deriving (Eq, Show, Functor)

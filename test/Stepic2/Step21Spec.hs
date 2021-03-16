@@ -1,6 +1,7 @@
 module Stepic2.Step21Spec (spec) where
 
 import Data.Monoid
+import Lib (Tree (..))
 import Stepic2.Step15
 import Stepic2.Step21
 import Stepic2.Triple11
