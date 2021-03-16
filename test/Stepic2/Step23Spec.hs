@@ -1,6 +1,8 @@
 module Stepic2.Step23Spec where
 
 import Data.Foldable
+import Data.Traversable (foldMapDefault)
+import Lib (Tree (..))
 import Stepic2.Step23
 import Test.Hspec
 
@@ -40,3 +42,12 @@ spec = parallel $ do
 
         it "test 3" $ do
           k2c 273.15 `shouldBe` Temperature 0.0
+
+  describe "Tree" $ do
+    describe "is Traversable" $ do
+      let testTree =
+            Branch (Branch (Branch Nil 1 Nil) 2 (Branch Nil 3 Nil)) 4 (Branch Nil 5 Nil)
+
+      it "test 1" $ do
+        foldMapDefault (: []) testTree
+          `shouldBe` [1, 3, 2, 5, 4]

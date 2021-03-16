@@ -2,7 +2,9 @@
 
 module Stepic2.Step23 where
 
+import Control.Applicative (liftA3)
 import Data.Traversable
+import Lib (Tree (..))
 
 data OddC a = Un a | Bi a a (OddC a) deriving (Eq, Show)
 
@@ -34,3 +36,12 @@ c2f (Temperature c) = Temperature (1.8 * c + 32)
 
 k2c :: Temperature Kelvin -> Temperature Celsius
 k2c (Temperature k) = Temperature k - 273.15
+
+instance Foldable Tree where
+  foldMap = foldMapDefault
+
+instance Traversable Tree where
+  sequenceA Nil = pure Nil
+  sequenceA (Branch l a r) = liftA3 post (sequenceA l) (sequenceA r) a
+    where
+      post x y z = Branch x z y
