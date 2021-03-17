@@ -1,4 +1,4 @@
-module Stepic2.Step23Spec where
+module Stepic2.Step23Spec (spec) where
 
 import Data.Foldable
 import Data.Traversable (foldMapDefault)
