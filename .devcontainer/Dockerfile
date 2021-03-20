@@ -1,9 +1,9 @@
 FROM haskell:8.8.4
 
-RUN stack install hlint
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y install \
+    cabal-install \
+    && apt-get autoremove
 
-# RUN apt-get update \
-#     && apt-get upgrade \
-#     && apt-get install -y \
-#     cabal-install \
-#     && apt-get autoremove
+RUN stack install --resolver lts-16.31 hlint
