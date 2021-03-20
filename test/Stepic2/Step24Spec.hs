@@ -24,32 +24,27 @@ spec = parallel $ do
         testHelper "BCD" `shouldBe` Left "unexpected B"
 
   describe "concat3OC" $ do
+    let unX = Un "x1"
+    let biX = Bi "x1" "x2" (Un "x3")
+    let unY = Un "y1"
+    let biY = Bi "y1" "y2" (Un "y3")
+    let unZ = Un "z1"
+    let biZ = Bi "z1" "z2" (Un "z3")
+
     it "test 1" $ do
-      let x = Un 'a'
-      let y = Un 'b'
-      let z = Un 'c'
-      concat3OC x y z `shouldBe` Bi 'a' 'b' (Un 'c')
+      concat3OC unX unY unZ `shouldBe` Bi "x1" "y1" (Un "z1")
 
     it "test 2" $ do
-      let x = Bi 'a' 'b' (Un 'c')
-      let y = Un 'd'
-      let z = Un 'e'
-      concat3OC x y z
-        `shouldBe` Bi 'a' 'b' (Bi 'c' 'd' (Un 'e'))
+      concat3OC biX unY unZ
+        `shouldBe` Bi "x1" "x2" (Bi "x3" "y1" (Un "z1"))
 
     it "test 3" $ do
-      let x = Un 'a'
-      let y = Bi 'b' 'c' (Un 'd')
-      let z = Un 'e'
-      concat3OC x y z
-        `shouldBe` Bi 'a' 'b' (Bi 'c' 'd' (Un 'e'))
+      concat3OC unX biY unZ
+        `shouldBe` Bi "x1" "y1" (Bi "y2" "y3" (Un "z1"))
 
     it "test 4" $ do
-      let x = Un 'a'
-      let y = Un 'b'
-      let z = Bi 'c' 'd' (Un 'e')
-      concat3OC x y z
-        `shouldBe` Bi 'a' 'b' (Bi 'c' 'd' (Un 'e'))
+      concat3OC unX unY biY
+        `shouldBe` Bi "x1" "y1" (Bi "z1" "z2" (Un "z3"))
 
     it "test 5" $ do
       let tst1 = Bi 'a' 'b' (Un 'c')
