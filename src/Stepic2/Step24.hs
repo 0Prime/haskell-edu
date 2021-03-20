@@ -16,3 +16,12 @@ concat3OC (Bi a1 a2 as) bs cs = Bi a1 a2 $ concat3OC as bs cs
 concatOC :: OddC (OddC a) -> OddC a
 concatOC (Un a) = a
 concatOC (Bi a b xs) = concat3OC a b $ concatOC xs
+
+instance Applicative OddC where
+  pure = Un
+  (<*>) fs xs = fs >>= (<$> xs)
+
+instance Monad OddC where
+  (>>=) (Un a) k = k a
+  (>>=) (Bi a1 a2 as) k =
+    concat3OC (k a1) (k a2) (as >>= k)

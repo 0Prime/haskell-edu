@@ -43,7 +43,7 @@ spec = parallel $ do
         `shouldBe` Bi "x1" "y1" (Bi "y2" "y3" (Un "z1"))
 
     it "test 4" $ do
-      concat3OC unX unY biY
+      concat3OC unX unY biZ
         `shouldBe` Bi "x1" "y1" (Bi "z1" "z2" (Un "z3"))
 
     it "test 5" $ do
@@ -86,3 +86,46 @@ spec = parallel $ do
                   )
               )
           )
+
+  describe "Oddc" $ do
+    describe "is Applicative & Monad" $ do
+      let tst1 = Bi 10 20 (Un 30)
+      let tst2 = Bi 1 2 (Bi 3 4 (Un 5))
+
+      it "test 1" $ do
+        (do x <- tst1; y <- tst2; return (x + y))
+          `shouldBe` Bi
+            11
+            12
+            ( Bi
+                13
+                14
+                ( Bi
+                    15
+                    21
+                    ( Bi
+                        22
+                        23
+                        (Bi 24 25 (Bi 31 32 (Bi 33 34 (Un 35))))
+                    )
+                )
+            )
+
+      it "test 2" $ do
+        (do x <- tst2; y <- tst1; return (x + y))
+          `shouldBe` Bi
+            11
+            21
+            ( Bi
+                31
+                12
+                ( Bi
+                    22
+                    32
+                    ( Bi
+                        13
+                        23
+                        (Bi 33 14 (Bi 24 34 (Bi 15 25 (Un 35))))
+                    )
+                )
+            )
