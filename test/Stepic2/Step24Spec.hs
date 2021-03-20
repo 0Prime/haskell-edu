@@ -68,3 +68,26 @@ spec = parallel $ do
                   (Bi 'g' 'h' (Bi 'i' 'j' (Un 'k')))
               )
           )
+
+  describe "concatOC" $ do
+    it "test 1" $ do
+      concatOC (Un (Un 42)) `shouldBe` Un 42
+
+    it "test 2" $ do
+      let a = Bi 'a' 'b' (Un 'c')
+      let b = Bi 'd' 'e' (Bi 'f' 'g' (Un 'h'))
+      let c = Bi 'i' 'j' (Un 'k')
+      concatOC (Bi a b (Un c))
+        `shouldBe` Bi
+          'a'
+          'b'
+          ( Bi
+              'c'
+              'd'
+              ( Bi
+                  'e'
+                  'f'
+                  ( Bi 'g' 'h' (Bi 'i' 'j' (Un 'k'))
+                  )
+              )
+          )
