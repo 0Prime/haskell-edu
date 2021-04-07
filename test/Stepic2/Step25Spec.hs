@@ -1,5 +1,6 @@
 module Stepic2.Step25Spec (spec) where
 
+import Control.Applicative
 import Stepic2.Step25
 import Test.Hspec
 
@@ -28,6 +29,27 @@ spec = parallel $ do
       it "test 5" $ do
         parseEP testP "B"
           `shouldBe` Left "pos 2: unexpected end of input"
+
+    describe "is Alternative" $ do
+      it "test 1" $ do
+        (runPrsEP empty 0 "ABCDEFG" :: (Int, Either String ((), String)))
+          `shouldBe` (0, Left "pos 0: empty alternative")
+
+      let tripleP [a, b, c] =
+            (\x y z -> [x, y, z])
+              <$> charEP a <*> charEP b <*> charEP c
+
+      it "test 2" $ do
+        parseEP (tripleP "ABC" <|> tripleP "ADC") "ABE"
+          `shouldBe` Left "pos 3: unexpected E"
+
+      it "test 3" $ do
+        parseEP (tripleP "ABC" <|> tripleP "ADC") "ADE"
+          `shouldBe` Left "pos 3: unexpected E"
+
+      it "test 4" $ do
+        parseEP (tripleP "ABC" <|> tripleP "ADC") "AEF"
+          `shouldBe` Left "pos 2: unexpected E"
 
     it "test 1" $ do
       runPrsEP (charEP 'A') 0 "ABC"

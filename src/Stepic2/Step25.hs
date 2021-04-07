@@ -1,5 +1,7 @@
 module Stepic2.Step25 where
 
+import Control.Applicative
+
 parseEP :: PrsEP a -> String -> Either String (a, String)
 parseEP p = snd . runPrsEP p 0
 
@@ -44,3 +46,12 @@ instance Applicative PrsEP where
 
       g f (n'', Right (y, s'')) = (n'', Right (f y, s''))
       g _ (n'', Left e) = (n'', Left e)
+
+instance Alternative PrsEP where
+  empty = PrsEP $ \_ _ -> (0, Left "pos 0: empty alternative")
+
+  (<|>) (PrsEP fl) (PrsEP fr) = PrsEP $ \n s -> choose (fl n s) (fr n s)
+    where
+      choose r@(_, Right _) _ = r
+      choose _ r@(_, Right _) = r
+      choose l@(nl, _) r@(nr, _) = if nl >= nr then l else r
