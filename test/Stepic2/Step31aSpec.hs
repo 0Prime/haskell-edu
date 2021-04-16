@@ -24,3 +24,28 @@ spec = parallel $ do
     it "test 4" $ do
       [1, 2, 3] !!!! (-3)
         `shouldBe` Left ErrNegativeIndex
+
+  describe "tryRead function" $ do
+    it "test 1" $ do
+      runExcept (tryRead "5" :: Except ReadError Int)
+        `shouldBe` Right 5
+
+    it "test 2" $ do
+      runExcept (tryRead "5" :: Except ReadError Double)
+        `shouldBe` Right 5.0
+
+    it "test 3" $ do
+      runExcept (tryRead "5zzz" :: Except ReadError Int)
+        `shouldBe` Left (NoParse "5zzz")
+
+    it "test 4" $ do
+      runExcept (tryRead "(True, ())" :: Except ReadError (Bool, ()))
+        `shouldBe` Right (True, ())
+
+    it "test 5" $ do
+      runExcept (tryRead "" :: Except ReadError (Bool, ()))
+        `shouldBe` Left EmptyInput
+
+    it "test 6" $ do
+      runExcept (tryRead "wrong" :: Except ReadError (Bool, ()))
+        `shouldBe` Left (NoParse "wrong")
