@@ -49,3 +49,18 @@ spec = parallel $ do
     it "test 6" $ do
       runExcept (tryRead "wrong" :: Except ReadError (Bool, ()))
         `shouldBe` Left (NoParse "wrong")
+
+  describe "trySum function" $ do
+    let testWith val = runExcept (trySum val :: Except SumError Integer)
+
+    it "test 1" $ do
+      testWith ["10", "20", "30"]
+        `shouldBe` Right 60
+
+    it "test 2" $ do
+      testWith ["10", "20", ""]
+        `shouldBe` Left (SumError 3 EmptyInput)
+
+    it "test 3" $ do
+      testWith ["10", "two", "30"]
+        `shouldBe` Left (SumError 2 (NoParse "two"))
