@@ -1,6 +1,7 @@
 module Stepic2.Step31aSpec (spec) where
 
 import Control.Monad.Trans.Except
+import Data.Foldable (msum)
 import Stepic2.Step31a
 import Test.Hspec
 
@@ -64,3 +65,32 @@ spec = parallel $ do
     it "test 3" $ do
       testWith ["10", "two", "30"]
         `shouldBe` Left (SumError 2 (NoParse "two"))
+
+  describe "lie2se function" $ do
+    let toSimple = runExcept . withExcept lie2se
+    let xs = [1, 2, 3]
+    let shouldBeError val msg =
+          val `shouldBe` Left (Simple {getSimple = msg})
+
+    it "test 1" $ do
+      toSimple (xs !!! 42)
+        `shouldBeError` "[index (42) is too large]"
+
+    it "test 2" $ do
+      toSimple (xs !!! (-2))
+        `shouldBeError` "[negative index]"
+
+    it "test 3" $ do
+      toSimple (xs !!! 2)
+        `shouldBe` Right 3
+
+    let toSimpleFromList =
+          runExcept . msum . map (withExcept lie2se)
+
+    it "test 4" $ do
+      toSimpleFromList [xs !!! (-2), xs !!! 42]
+        `shouldBeError` "[negative index][index (42) is too large]"
+
+    it "test 5" $ do
+      toSimpleFromList [xs !!! (-2), xs !!! 2]
+        `shouldBe` Right 3

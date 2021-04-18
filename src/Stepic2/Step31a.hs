@@ -34,3 +34,18 @@ trySum :: [String] -> Except SumError Integer
 trySum xs = sum <$> zipWithM fn xs [1 ..]
   where
     fn s i = withExcept (SumError i) (tryRead s)
+
+newtype SimpleError = Simple {getSimple :: String}
+  deriving (Eq, Show)
+
+instance Semigroup SimpleError where
+  (<>) (Simple s1) (Simple s2) = Simple $ s1 ++ s2
+
+instance Monoid SimpleError where
+  mempty = Simple ""
+
+lie2se :: ListIndexError -> SimpleError
+lie2se ErrNegativeIndex = Simple "[negative index]"
+lie2se (ErrIndexTooLarge i) =
+  Simple $
+    "[index (" ++ show i ++ ") is too large]"
