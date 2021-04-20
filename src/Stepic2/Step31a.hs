@@ -1,7 +1,9 @@
 module Stepic2.Step31a where
 
+import Control.Applicative
 import Control.Monad
 import Control.Monad.Trans.Except
+import Data.Bifunctor
 import Data.Foldable
 import Text.Read
 
@@ -49,3 +51,24 @@ lie2se ErrNegativeIndex = Simple "[negative index]"
 lie2se (ErrIndexTooLarge i) =
   Simple $
     "[index (" ++ show i ++ ") is too large]"
+
+newtype Validate e a = Validate {getValidate :: Either [e] a}
+
+instance Functor (Validate e) where
+  fmap = liftA
+
+instance Applicative (Validate e) where
+  pure = Validate . pure
+  (<*>) (Validate l) (Validate r) = Validate $ fn l r
+    where
+      fn (Right f) xs = f <$> xs
+      fn (Left el) (Left er) = Left $ el ++ er
+      fn (Left e) _ = Left e
+
+collectE :: Except e a -> Validate e a
+collectE = Validate . first (: []) . runExcept
+
+validateSum :: [String] -> Validate SumError Integer
+validateSum xs = sum <$> zipWithM fn xs [1 ..]
+  where
+    fn s i = collectE $ withExcept (SumError i) (tryRead s)

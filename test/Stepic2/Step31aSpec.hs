@@ -94,3 +94,15 @@ spec = parallel $ do
     it "test 5" $ do
       toSimpleFromList [xs !!! (-2), xs !!! 2]
         `shouldBe` Right 3
+
+  describe "validateSum function" $ do
+    it "test 1" $ do
+      getValidate (validateSum ["10", "20", "30"])
+        `shouldBe` Right 60
+
+    it "test 2" $ do
+      getValidate (validateSum ["10", "", "30", "oops"])
+        `shouldBe` Left
+          [ SumError 2 EmptyInput,
+            SumError 4 (NoParse "oops")
+          ]
